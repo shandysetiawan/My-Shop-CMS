@@ -49,7 +49,7 @@
 <script>
 // import axios from 'axios';
 // import Modal from "@/components/Modal.vue";
-const baseURL = "http://localhost:3000";
+const baseURL = "https://e-commerce-atma.herokuapp.com";
 import axios from "axios";
 export default {
   name: "ContentDashboard",

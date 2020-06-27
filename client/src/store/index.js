@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://e-commerce-atma.herokuapp.com';
 
 Vue.use(Vuex);
 
@@ -35,7 +35,8 @@ export default new Vuex.Store({
           this.commit('SET_PRODUCTS', response.data)
         })
         .catch((error) => {
-          console.log(error.response.data.message);
+          console.log(error.response)
+          // console.log(error.response.data.message);
         });
     },
     setLogin(context, payload) {

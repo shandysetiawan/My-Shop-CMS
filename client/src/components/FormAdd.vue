@@ -39,7 +39,7 @@
 <script>
 import axios from "axios";
 
-const baseURL = "http://localhost:3000";
+const baseURL = "https://e-commerce-atma.herokuapp.com";
 export default {
   name: "FormAdd",
   data() {
