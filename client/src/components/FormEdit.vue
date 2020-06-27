@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="msgBoxAdd">
-      <div class="alert alert-primary" role="alert" v-if="msgAdd">{{this.msgAdd}}</div>
+    <div class="msgBoxEdit">
+      <div class="alert alert-primary" role="alert" v-if="msgEdit">{{this.msgEdit}}</div>
     </div>
-    <br />
-    <h3>Tambah Produk Baru</h3>
-    <form class="form form-horizontal column" @submit.prevent="addProduct">
+    <form class="form form-horizontal column" @submit.prevent="editProduct">
+      <h3>Update Product Detail</h3>
       <div class="form-group">
         <label for="Name">Name</label>
         <input
@@ -28,7 +27,7 @@
         <label for="Price">Price</label>
         <input min="0" type="number" class="form-control" v-model="priceProduct" />
       </div>
-      <button type="submit" class="btn btn-success">Create</button>
+      <button type="submit" class="btn btn-success">Update</button>
       <router-link v-bind:to="{ name: 'Dashboard' }">
         <button type="button" class="btn btn-warning">Cancel</button>
       </router-link>
@@ -41,7 +40,7 @@ import axios from "axios";
 
 const baseURL = "http://localhost:3000";
 export default {
-  name: "FormAdd",
+  name: "FormEdit",
   data() {
     return {
       nameProduct: "",
@@ -49,14 +48,43 @@ export default {
       priceProduct: "",
       stockProduct: "",
       dataProduct: {},
-      msgAdd: ""
+      msgEdit: ""
     };
   },
+  computed: {
+    getProducts() {
+      // console.log(this.$store.state.products);
+      return this.$store.state.updateId;
+    }
+  },
+  created() {
+    this.findProduct();
+  },
   methods: {
-    addProduct() {
+    findProduct() {
+      const { id } = this.$route.params;
       axios({
-        method: "post",
-        url: `${baseURL}/products`,
+        method: "get",
+        url: `${baseURL}/products/${id}`,
+        headers: { access_token: localStorage.token }
+      })
+        .then(response => {
+          // console.log(response.data);
+          this.nameProduct = response.data.name;
+          this.imageProduct = response.data.image_url;
+          this.priceProduct = response.data.price;
+          this.stockProduct = response.data.stock;
+        })
+        .catch(error => {
+          // console.log(error.response.data.message);
+          console.log(error.response);
+        });
+    },
+    editProduct() {
+      const { id } = this.$route.params;
+      axios({
+        method: "put",
+        url: `${baseURL}/products/${id}`,
         data: {
           name: this.nameProduct,
           image_url: this.imageProduct,
@@ -82,14 +110,15 @@ export default {
         })
         .catch(error => {
           // console.log(error.response.data.message);
+          // console.log(error.response);
           if (error.response.data.message == "Internal Server Error!") {
-            this.msgAdd =
+            this.msgEdit =
               "Pastikan Name sudah terisi, stock dan price tidak boleh minus dan harus diisi angka";
           } else {
-            this.msgAdd = error.response.data.message;
+            this.msgEdit = error.response.data.message;
           }
           setTimeout(() => {
-            this.msgAdd = "";
+            this.msgEdit = "";
           }, 3000);
           // console.log(error.response);
         });

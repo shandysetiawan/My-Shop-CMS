@@ -14,7 +14,7 @@ class UserController {
 
         User.findOne({ where: { email: userLogin.email } })
             .then((data) => {
-
+                // console.log(data)
                 if (data) {
 
                     if (Helper.checkPassword(userLogin.password, data.password)) {
@@ -28,7 +28,8 @@ class UserController {
                         throw ({ name: "EMAIL_PASS_NOT MATCH" })
                     }
                 } else {
-                    throw ({ message: "NO_EMAIL_FOUND" })
+                    // console.log('kesini ga')
+                    throw ({ name: "NO_EMAIL_FOUND" })
                 }
             })
             .catch((err) => {

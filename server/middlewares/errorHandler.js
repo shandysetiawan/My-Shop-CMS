@@ -29,12 +29,12 @@ function errorHandler(err, req, res, next) {
             errorCode = err.name
             errorMessage = "Your email already register, please login or use other email!"
             break
-        case "NO_EMAIL_FOUND":
+        case 'NO_EMAIL_FOUND':
             statusCode = 404
             errorCode = err.name
             errorMessage = "Your email not found, please register!"
             break
-        case "AUTH_FAILED":
+        case "AUTH_FAILED1":
             statusCode = 400
             errorCode = err.name
             errorMessage = "Process Authentication Failed!"
@@ -61,6 +61,7 @@ function errorHandler(err, req, res, next) {
             break
     }
 
+    // console.log(errorMessage)
     res.status(statusCode).json({ error: errorCode, message: errorMessage })
 
 }

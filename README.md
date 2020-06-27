@@ -1,10 +1,13 @@
 # E-COMMERCE API DOCUMENTATION
 
-> E-COMMERCE is website a website. This app has :
+> E-COMMERCE is a CMS website to accomodate management of product database. This app has :
 >
-> RESTful endpoint for todo's CRUD operation with JSON formatted response
-> Technology use
-> client: vue component
+> RESTful endpoint for products's CRUD operation with JSON formatted response
+
+### Technology use in this website
+
+> client: VUE CLI,VUEX, Component,Bootstrap
+>
 > server: sequelize,express,postgres,ORM(express)
 
 ## Restful Endpoints
@@ -83,9 +86,10 @@ Request body:
 
 ```json
 {
-  "title": "<your task title>",
-  "category": "<your task category>",
-  "description": "<your task description>"
+  "name": "<your product name>",
+  "image_url": "<your product image_url>",
+  "price": "<your product price>",
+  "stock": "<your product stock>"
 }
 ```
 
@@ -93,10 +97,11 @@ Response(201 - Created):
 
 ```json
 {
-  "id": 1,
-  "title": "<your task title>",
-  "category": "<your task category>",
-  "description": "<your task description>",
+  "id": "<your product id>",
+  "name": "<your product name>",
+  "image_url": "<your product image_url>",
+  "price": "<your product price>",
+  "stock": "<your product stock>",
   "updatedAt": "2020-06-08T14:38:39.104Z",
   "createdAt": "2020-06-08T14:38:39.104Z"
 }
@@ -129,9 +134,10 @@ Response(200 - Ok):
 [
   {
     "id": "<your product id>",
-    "title": "<your task title>",
-    "category": "<your task category>",
-    "description": "<your task description>",
+    "name": "<your product name>",
+    "image_url": "<your product image_url>",
+    "price": "<your product price>",
+    "stock": "<your product stock>",
     "updatedAt": "2020-06-08T14:38:39.104Z",
     "createdAt": "2020-06-08T14:38:39.104Z"
   },
@@ -234,7 +240,7 @@ Response(200 - Ok):
 
 ```json
 {
-  "message": "Successfully delete task!"
+  "message": "Successfully delete product!"
 }
 ```
 

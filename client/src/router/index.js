@@ -3,18 +3,19 @@ import VueRouter from 'vue-router';
 import Dashboard from '../views/Dashboard.vue';
 import Login from '../views/Login.vue';
 import AddProduct from '../views/AddProduct.vue';
+import EditProduct from '../views/EditProduct.vue';
 import NotFound from '../views/NotFound.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/dashboard',
+    path: '/',
     name: 'Dashboard',
     component: Dashboard,
   },
   {
-    path: '/login',
+    path: '/login', // kalau udah login lngs ke
     name: 'Login',
     component: Login,
   },
@@ -24,9 +25,9 @@ const routes = [
     component: AddProduct,
   },
   {
-    path: '/edit-product',
+    path: '/edit-product/:id', // kalo modal ga perlu bikin path
     name: 'EditProduct',
-    component: AddProduct,
+    component: EditProduct,
   },
   {
     path: '*',
@@ -42,9 +43,10 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path !== 'Login' && !localStorage.token) next({ name: 'Login' })
-//   else next()
-// })
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login' && !localStorage.token) next({ name: 'Login' });
+  else if (to.path == '/login' && localStorage.token) next({ name: 'Dashboard' })
+  else next();
+});
 
 export default router;

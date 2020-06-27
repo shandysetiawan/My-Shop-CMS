@@ -4,7 +4,7 @@ const { User, Product } = require('../models')
 function authentication(req, res, next) {
 
     const access_token = req.headers.access_token
-    console.log(">>>>>>>>>>>>>>", access_token)
+    // console.log(">>>>>>>>>>>>>>", access_token)
     if (!access_token) {
         next({ name: "AUTH_FAILED1" })
     } else {
@@ -27,9 +27,6 @@ function authentication(req, res, next) {
             next(err)
         }
     }
-
-
-
 }
 
 function authorization(req, res, next) {

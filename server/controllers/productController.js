@@ -56,11 +56,16 @@ class ProductController {
         let productId = req.params.id
 
 
-        Product.update(updateProduct, { where: { id: productId } })
+        Product.update(updateProduct, { where: { id: productId } },)
             .then((data) => {
+                // console.log("update1111>>>>>>>>>>", data)
 
-                res.status(200).json({ data })
+                return Product.findByPk(productId)
 
+            })
+            .then((data) => {
+                // console.log("update2 >>>>>>>>>>", data)
+                res.status(200).json(data)
             })
             .catch((err) => {
 
