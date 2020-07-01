@@ -29,7 +29,16 @@ Response(500 - INTERNAL SERVER ERROR)
 }
 ```
 
+Response(400 - AUTH_FAILED)
+
+```json
+{
+  "message": "Authentication Failed!"
+}
+```
+
 ## POST /login
+> Login account
 
 Request body:
 
@@ -44,6 +53,7 @@ Response(200 - Ok):
 
 ```json
 {
+  "emailUser": "<your email>",
   "access_token": "<user token>"
 }
 ```
@@ -64,15 +74,8 @@ Response(400 - EMAIL PASS NOT MATCH)
 }
 ```
 
-Response(400 - AUTH_FAILED)
-
-```json
-{
-  "message": "Authentication Failed!"
-}
-```
-
-## GET /products
+## POST /products
+> Create new product
 
 Request headers:
 
@@ -102,8 +105,8 @@ Response(201 - Created):
   "image_url": "<your product image_url>",
   "price": "<your product price>",
   "stock": "<your product stock>",
-  "updatedAt": "2020-06-08T14:38:39.104Z",
-  "createdAt": "2020-06-08T14:38:39.104Z"
+  "updatedAt": "<your product updatedAt date>",
+  "createdAt": "<your product createdAt date>",
 }
 ```
 
@@ -115,7 +118,8 @@ Response(400 - SequelizeValidationError)
 }
 ```
 
-## GET /products
+## GET /products 
+> Get all llist products
 
 Request headers:
 
@@ -138,8 +142,8 @@ Response(200 - Ok):
     "image_url": "<your product image_url>",
     "price": "<your product price>",
     "stock": "<your product stock>",
-    "updatedAt": "2020-06-08T14:38:39.104Z",
-    "createdAt": "2020-06-08T14:38:39.104Z"
+    "updatedAt": "<your product updatedAt date>",
+    "createdAt": "<your product createdAt date>",
   },
   {
     ...
@@ -148,6 +152,7 @@ Response(200 - Ok):
 ```
 
 ## GET /products/:id
+> Get one product by id
 
 Request headers:
 
@@ -171,12 +176,13 @@ Response(200 - Ok):
   "image_url": "<your product image url>",
   "price": "<your product price>",
   "stock": "<your product stock>",
-  "updatedAt": "2020-06-08T14:38:39.104Z",
-  "createdAt": "2020-06-08T14:38:39.104Z"
+  "updatedAt": "<your product updatedAt date>",
+  "createdAt": "<your product createdAt date>",
 }
 ```
 
 ## PUT /products/:id
+> Edit product by id
 
 Request headers:
 
@@ -208,8 +214,8 @@ Response(200 - OK):
   "image_url": "<your product image url>",
   "price": "<your product price>",
   "stock": "<your product stock>",
-  "updatedAt": "2020-06-20T14:38:39.104Z",
-  "createdAt": "2020-06-20T14:38:39.104Z"
+  "updatedAt": "<your product updatedAt date>",
+  "createdAt": "<your product createdAt date>",
 }
 ```
 
@@ -222,6 +228,7 @@ Response(400 - SequelizeValidationError)
 ```
 
 ## DELETE /products/:id
+> Delete product by id
 
 Request headers:
 
